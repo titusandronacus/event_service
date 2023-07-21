@@ -13,3 +13,20 @@ class Event(EventBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+
+
+class BaseUser(BaseModel):
+    username: str
+
+
+class User(BaseUser):
+    hashed_password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
