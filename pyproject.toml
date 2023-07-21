@@ -1,15 +1,24 @@
 [tool.poetry]
 name = "event-service"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "small demonstration of api building using FastApi and PostgreSQL"
+authors = ["Travis Burke <travisburke52@gmail.com>"]
 readme = "README.md"
 packages = [{include = "event_service"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 fastapi = "^0.100.0"
+sqlalchemy = "^2.0.19"
+python-dotenv = "^1.0.0"
+pydantic-settings = "^2.0.2"
+uvicorn = "^0.23.1"
+psycopg2-binary = "^2.9.6"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+httpx = "^0.24.1"
 
 [build-system]
 requires = ["poetry-core"]
