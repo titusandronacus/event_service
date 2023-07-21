@@ -3,10 +3,12 @@ from sqlalchemy.orm import Session
 
 from ..models import Event, EventCreate
 from ..crud import event as event_crud
-from ..dependencies import get_db
+from ..dependencies import get_db, get_current_user
 
 
-router = APIRouter(prefix="/events")
+router = APIRouter(prefix="/events",
+                   dependencies=[Depends(get_current_user)]
+                   )
 
 
 @router.get("/", response_model=list[Event])
