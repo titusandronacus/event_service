@@ -17,8 +17,9 @@ router = APIRouter(prefix="/events",
 @router.get("/", response_model=list[Event])
 def read_events(name: str | None = None, db: Session = Depends(get_db)):
     """
-    Get all Event
+    Get all Events. Can be filtered by event name
     """
+    print(f"handler {name}")
     return event_crud.get_events(db, name)
 
 

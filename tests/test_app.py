@@ -90,19 +90,19 @@ def test_get_events():
     assert data[0]['name'] == 'test1'
 
 
-# TODO: blocked by filter being silly
-# def test_get_events_by_name():
-#     set_data = test_client.post(
-#         "/events/",
-#         json={"name": "test2"}
-#     )
-#
-#     response = test_client.get("/events/?name=test2")
-#     assert response.status_code == 200
-#     data = response.json()
-#     assert isinstance(data, list)
-#     assert len(data) == 1
-#     assert data[0]['name'] == 'test2'
+def test_get_events_by_name():
+    set_data = test_client.post(
+        "/events/",
+        json={"name": "test2"},
+        headers={"Authorization": "Bearer testtoken"}
+    )
+
+    response = test_client.get("/events/?name=test2", headers={"Authorization": "Bearer testtoken"})
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) == 1
+    assert data[0]['name'] == 'test2'
 
 
 def test_get_event():
