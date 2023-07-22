@@ -1,5 +1,5 @@
 """
-Lookup utils for users (db and env) utils are here
+Lookup utils for users (currently only env admin user) utils are here
 """
 import os
 from datetime import datetime, timedelta
@@ -32,7 +32,7 @@ def get_hashed_password(password):
     return pwd_context.hash(password)
 
 
-def decode_token(token):
+def decode_token(token) :
     return jwt.decode(token, os.environ["SECRET_KEY"], algorithms=[os.environ["ALGORITHM"]])
 
 

@@ -114,12 +114,12 @@ def test_get_event():
     assert data['name'] == 'test1'
 
 
-def test_get_event_returns_401_on_unknown_id():
+def test_get_event_returns_404_on_unknown_id():
     response = test_client.get("/events/3", headers={"Authorization": "Bearer testtoken"})
     assert response.status_code == 404
 
 
-def test_patch_event_401_on_unknown_id():
+def test_patch_event_404_on_unknown_id():
     response = test_client.patch("/events/3",
                                  json={"name": "will not update"},
                                  headers={"Authorization": "Bearer testtoken"})
@@ -135,3 +135,15 @@ def test_patch_event():
     assert isinstance(data, dict)
     assert data['id'] == 1
     assert data['name'] == 'updated test1'
+
+
+def test_delete_event_404_on_unknown_id():
+    response = test_client.delete("/events/3", headers={"Authorization": "Bearer testtoken"})
+    assert response.status_code == 404
+
+
+def test_delete_event():
+    response = test_client.delete("/events/1", headers={"Authorization": "Bearer testtoken"})
+    assert response.status_code == 200
+    data = response.text
+    assert data == '"Event 1 successfully deleted"'
