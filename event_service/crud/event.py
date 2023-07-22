@@ -43,14 +43,27 @@ def create_event(db: Session, event: schemas.EventCreate):
     return db_event
 
 
-# def update_event(db: Session, event: schemas.Event):
-#     """
-#
-#     @param db:
-#     @param event:
-#     @return:
-#     """
-#     return db.execute(update(models.Event).where(models.Event.id == event.id).values(event.model_dump()))
+def update_event(db: Session, event: schemas.Event):
+    """
+
+    @param db:
+    @param event:
+    @return:
+    """
+    stmt = (
+        update(models.Event)
+        .where(models.Event.id == event.id)
+        .values(**event.model_dump(exclude={'id'}))
+    )
+    db.execute(stmt)
+    db.commit()
+
+    # Due to sqlite3 being VERY hard to upgrade (recompile python and override external dependency),
+    # we're just going to get the event again instead of using RETURNING function.
+    # There are better ways to handle this (checking driver type and changing method), but that will
+    # have to wait
+    return get_event(db, event.id)
+
 #
 #
 # def delete_event(db: Session, event_id: int):
