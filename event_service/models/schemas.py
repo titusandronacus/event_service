@@ -1,3 +1,6 @@
+"""
+Contains the Pydantic models used in Event Service
+"""
 from pydantic import BaseModel, ConfigDict
 
 

@@ -1,3 +1,6 @@
+"""
+Contains the dependencies used by Event Service to authenticate user and expose OAuth2
+"""
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, status

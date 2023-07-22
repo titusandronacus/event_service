@@ -1,5 +1,5 @@
 """
-Lookup utils for users (db and env) utils are here
+Lookup utils for users (currently only env admin user) utils are here
 """
 import os
 from datetime import datetime, timedelta

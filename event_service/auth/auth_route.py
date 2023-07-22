@@ -1,3 +1,6 @@
+"""
+Route handler for authentication purposes
+"""
 import os
 import datetime
 from typing import Annotated

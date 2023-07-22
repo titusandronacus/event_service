@@ -1,3 +1,6 @@
+"""
+CRUD layer for Event objects
+"""
 from sqlalchemy.orm import Session
 from sqlalchemy import update, delete
 
@@ -64,13 +67,17 @@ def update_event(db: Session, event: schemas.Event):
     # have to wait
     return get_event(db, event.id)
 
-#
-#
-# def delete_event(db: Session, event_id: int):
-#     """
-#
-#     @param db:
-#     @param event_id:
-#     @return:
-#     """
-#     return db.execute()
+
+def delete_event(db: Session, event_id: int):
+    """
+
+    @param db:
+    @param event_id:
+    @return:
+    """
+    stmt = (
+        delete(models.Event)
+        .where(models.Event.id == event_id)
+    )
+    db.execute(stmt)
+    db.commit()

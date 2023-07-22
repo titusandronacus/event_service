@@ -1,3 +1,6 @@
+"""
+Main fastapi application for Event Service
+"""
 from fastapi import FastAPI
 
 from .routes.event import router as event_router

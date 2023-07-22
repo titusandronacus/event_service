@@ -1,3 +1,6 @@
+"""
+route handlers for Events
+"""
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -14,7 +17,7 @@ router = APIRouter(prefix="/events",
 @router.get("/", response_model=list[Event])
 def read_events(name: str | None = None, db: Session = Depends(get_db)):
     """
-    # here be some markdown!
+    Get all Event
     """
     return event_crud.get_events(db, name)
 
@@ -22,7 +25,7 @@ def read_events(name: str | None = None, db: Session = Depends(get_db)):
 @router.get("/{event_id}", response_model=Event)
 def read_event_by_id(event_id: int, db: Session = Depends(get_db)):
     """
-    # here be some markdown!
+    Get an Event by its id
     """
     db_event = event_crud.get_event(db, event_id)
     if db_event is None:
@@ -33,13 +36,16 @@ def read_event_by_id(event_id: int, db: Session = Depends(get_db)):
 @router.post("/", response_model=Event)
 def create_event(new_event: EventCreate, db: Session = Depends(get_db)):
     """
-    # here be some markdown!
+    Create a new Event
     """
     return event_crud.create_event(db, new_event)
 
 
 @router.patch("/{event_id}", response_model=Event)
 def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db)):
+    """
+    Update an existing Event
+    """
     event_to_update = event_crud.get_event(db, event_id)
     if event_to_update is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found")
@@ -49,9 +55,14 @@ def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db
     return updated_event
 
 
+@router.delete("/{event_id}")
+def delete_event(event_id: int, db: Session = Depends(get_db)):
+    """
+    Delete an existing Event
+    """
+    event_to_delete = event_crud.get_event(db, event_id)
+    if event_to_delete is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found")
+    event_crud.delete_event(db, event_id)
+    return f"Event {event_id} successfully deleted"
 
-#
-# @router.delete("/{event_id}")
-# def delete_event(event_id):
-#     # delete event by id
-#     pass

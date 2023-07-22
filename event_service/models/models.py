@@ -1,3 +1,6 @@
+"""
+Contains the ORM models for objects used in Event Service
+"""
 from sqlalchemy import Column, String, Integer
 
 from .database import Base
