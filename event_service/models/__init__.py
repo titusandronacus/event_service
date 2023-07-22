@@ -1,1 +1,2 @@
-from .schemas import EventBase, EventCreate, Event, BaseUser, User, Token, TokenData
+from .schemas import EventBase, EventCreate, Event, EventUpdate
+from .schemas import User, Token, TokenData

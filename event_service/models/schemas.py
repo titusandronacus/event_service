@@ -15,6 +15,11 @@ class Event(EventBase):
     id: int
 
 
+class EventUpdate(Event):
+    name: str = None
+    id: int = None
+
+
 class BaseUser(BaseModel):
     username: str
 
