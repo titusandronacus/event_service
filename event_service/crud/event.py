@@ -2,7 +2,7 @@
 CRUD layer for Event objects
 """
 from sqlalchemy.orm import Session
-from sqlalchemy import update, delete
+from sqlalchemy import select, update, delete
 
 from ..models import models, schemas
 
@@ -11,12 +11,12 @@ def get_events(db: Session, name: str = None):
     """
     Gets Events from the database
     """
-    q = db.query(models.Event)
-    # TODO: why doesn't this filter actually filter stuff?
-    # if name is not None:
-    #     q.filter_by(name=name)
 
-    return q.all()
+    query_filters = []
+    if name is not None:
+        query_filters.append(models.Event.name == name)
+
+    return db.query(models.Event).filter(*query_filters).all()
 
 
 def get_event(db: Session, event_id: int):
