@@ -17,6 +17,9 @@ router = APIRouter()
 
 @router.post("/auth", response_model=Token)
 def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    """
+    Endpoint used to authenticate user for Event Service
+    """
 
     user = user_utils.authenticate_user(form_data.username, form_data.password)
     if not user:

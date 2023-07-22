@@ -32,7 +32,7 @@ def get_hashed_password(password):
     return pwd_context.hash(password)
 
 
-def decode_token(token):
+def decode_token(token) :
     return jwt.decode(token, os.environ["SECRET_KEY"], algorithms=[os.environ["ALGORITHM"]])
 
 
